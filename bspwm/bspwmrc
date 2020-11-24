@@ -1,0 +1,46 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+#bspwmbar &
+#polybar example &
+
+feh --bg-scale ~/Pictures/Wallpapers/wallhaven-2ero7g.jpg
+
+external_monitor=$(xrandr --query | grep 'HDMI-1')
+if [[ $external_monitor == *" connected "* ]]; then
+    bspc monitor eDP-1 -d 1 2 3 4 5 #6 7 8 9 10
+    bspc monitor HDMI-1 -d 6 7 8 9 10
+else
+    bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
+fi
+
+
+
+bash $HOME/.config/polybar/launch.sh
+
+
+bspc config border_width         4
+#bspc config window_gap           6
+bspc config window_gap           10
+
+bspc config split_ratio           0.50
+bspc config borderless_monocle    true
+bspc config gapless_monocle       true
+bspc config focus_follows_pointer true
+bspc config click_to_focus        true
+
+# Dual monitors disconnected
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+
+#bspc config focused_border_color '#FF5E8E'
+bspc config focused_border_color '#7F1131'
+bspc config normal_border_color '#668b9b'
+bspc config presel_feedback_color '#FF5E8E'
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
