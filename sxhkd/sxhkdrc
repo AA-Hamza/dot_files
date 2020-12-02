@@ -2,12 +2,18 @@
 # wm independent hotkeys
 #
 
-## terminal emulator
 super + Return
-	urxvt
-#same pwd terminal
+    alacritty
+
 super + shift + Return
-    urxvt -cd "`xcwd`" 
+    alacritty --working-directory $(xcwd)
+
+### terminal emulator
+#super + Return
+#	urxvt
+##same pwd terminal
+#super + shift + Return
+#    urxvt -cd "`xcwd`" 
 
 #super + Return
 #    xfce4-terminal
