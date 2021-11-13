@@ -19,6 +19,7 @@ map p print
 set font                        "Hack NF 12"
 set recolor                     true
 set completion-group-bg         "#002b36"
+set completion-group-bg         "#002b36"
 set completion-group-fg         "#839496"
 set completion-bg               "#073642"
 set completion-fg               "#93a1a1"
@@ -44,3 +45,4 @@ set default-bg                  "#0a111c"
 set default-fg                  "#101a2c"
 set recolor-lightcolor          "#101a2c"
 set recolor-darkcolor           "#E5E5E5"
+set guioptions none

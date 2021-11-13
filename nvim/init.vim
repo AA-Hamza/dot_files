@@ -17,6 +17,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'vim-airline/vim-airline'
+Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 call vundle#end()            " required
