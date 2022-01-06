@@ -7,6 +7,20 @@ nnoremap <esc>^[ <esc>^[
 set relativenumber
 syntax on
 
+"let g:coc_snippet_next = '<c-l>'
+"let g:coc_snippet_prev = '<c-h>'
+"inoremap <silent><expr> <c-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
+"inoremap <silent><expr> <c-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
+"vnoremap <silent><expr> <c-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
+"vnoremap <silent><expr> <c-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
+
+nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 

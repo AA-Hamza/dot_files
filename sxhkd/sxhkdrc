@@ -26,7 +26,9 @@ super + shift + Return
 #super + d
 #	dmenu_run
 super + d
-    rofi -modi "window,run,drun" -show run -font "FiraCode 16" -rnow -run-command "bash -i -c '{cmd}'"
+    rofi -modi "window,run,drun,filebrowser" -show run -font "FiraCode 16" 
+    #-rnow 
+    #rofi -rnow -run-command "bash -i -c '{cmd}'"
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -179,3 +181,7 @@ super + r : {h,j,k,l}
 #Select random wallpaper
 super + shift + p
     feh --bg-scale "/home/ahmed/Pictures/Wallpapers/"$(ls ~/Pictures/Wallpapers/ | sort --random-sort | head -1)
+
+#Controling the fans
+super + F5
+    i8kfan 0 0
