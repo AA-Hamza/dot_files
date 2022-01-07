@@ -26,7 +26,7 @@ set $menu rofi -modi "window,run,drun,filebrowser" -show run -font "FiraCode 16"
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
 #output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Pictures/Wallpapers/wallhaven-8ogod1.jpg fill
+output * bg ~/Pictures/Wallpapers/wallhaven-96w8e8.png fill
 #
 # Example configuration:
 #
@@ -169,10 +169,10 @@ input "1739:31251:DLL06E5:01_06CB:7A13_Touchpad" {
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Shift+f floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Shift+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -229,9 +229,9 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
-        #inactive_workspace #32323200 #32323200 #5c5c5c
-        inactive_workspace #333333 #222222 #5c5c5c
+        background #070D1A
+        inactive_workspace #0A1732 #071023 #5c5c5c
+        focused_workspace #ffffff #1E366A #ffffff
     }
 }
 
@@ -271,3 +271,10 @@ default_border pixel 3
 #mouse focus
 focus_follows_mouse always
 
+#lock
+bindsym Mod1+Shift+l exec swaylock -c 111111 -f --font FiraCode
+
+#focused client colors
+set $unfocused_border #070D1A
+set $focused_border #3560C8
+client.focused $unfocused_border $unfocused_border $unfocused_border $focused_border $focused_border
