@@ -218,21 +218,22 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+#    position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
     #status_command while ~/.config/sway/status.sh; do sleep 1; done
-    status_command bumblebee-status -m sensors2 cpu memory brightness pasink battery layout date time -p time.format="%H:%M" date.format="%Y/%m/%d" pasink.percent_change="5" pasink.limit="100" sensors2.chip_include="coretemp,dell_smm" sensors2.chip_field_exclude="coretemp-isa-0000.temp2,coretemp-isa-0000.temp3,coretemp-isa-0000.temp4,coretemp-isa-0000.temp5" -t iceberg-dark-powerline
+    #status_command bumblebee-status -m sensors2 cpu memory brightness pasink battery layout date time -p time.format="%H:%M" date.format="%Y/%m/%d" pasink.percent_change="5" pasink.limit="100" sensors2.chip_include="coretemp,dell_smm" sensors2.chip_field_exclude="coretemp-isa-0000.temp2,coretemp-isa-0000.temp3,coretemp-isa-0000.temp4,coretemp-isa-0000.temp5" -t iceberg-dark-powerline
+    swaybar_command waybar
 
 
-    colors {
-        statusline #ffffff
-        background #070D1A
-        inactive_workspace #0A1732 #071023 #5c5c5c
-        focused_workspace #ffffff #1E366A #ffffff
-    }
+#    colors {
+#        statusline #ffffff
+#        background #070D1A
+#        inactive_workspace #0A1732 #071023 #5c5c5c
+#        focused_workspace #ffffff #1E366A #ffffff
+#    }
 }
 
 include @sysconfdir@/sway/config.d/*

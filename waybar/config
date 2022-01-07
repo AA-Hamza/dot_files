@@ -1,0 +1,156 @@
+// -*- mode: json -*-
+
+{
+	"layer": "top",
+	"position": "top",
+
+	"modules-left": [
+		"sway/workspaces",
+		"custom/right-arrow-dark",
+        "sway/window"
+	],
+	"modules-center": [
+	],
+	"modules-right": [
+		"custom/left-arrow-dark",
+		"pulseaudio",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"network",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"memory",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"cpu",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"backlight",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"temperature",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"battery",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"clock",
+		"tray"
+	],
+
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{name}"
+	},
+	"sway/window": {
+        "max-length": 35
+	},
+
+    "backlight": {
+        "device": "intel_backlight",
+        "on-scroll-up": "light -A 10",
+        "on-scroll-down": "light -U 10",
+        "smooth-scrolling-threshold": 4.0,
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+
+	"clock#1": {
+		"format": "{:%a}",
+		"tooltip": false
+	},
+	"clock#2": {
+		"format": "{:%H:%M}",
+		"tooltip": false
+	},
+	"clock#3": {
+		"format": "{:%m-%d}",
+		"tooltip": false
+	},
+    "network": {
+         "interface": "wlp2s0",
+         "format": "{ifname}",
+         "format-wifi": "{essid} ({signalStrength}%) ",
+         "format-ethernet": "{ifname} ",
+         "format-disconnected": "", //An empty format will hide the module.
+         "format-disconnected": "",
+         "tooltip-format": "{ifname}",
+         "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+         "tooltip-format-ethernet": "{ifname} ",
+         "tooltip-format-disconnected": "Disconnected",
+         "max-length": 50
+    },
+
+	"pulseaudio": {
+		"format": "{icon} {volume:2}%",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": "MUTE",
+        "smooth-scrolling-threshold": 4.0,
+		"format-icons": {
+			"headphones": "",
+			"default": [
+				"",
+				""
+			]
+		},
+		"scroll-step": 5,
+        "on-click": "amixer -q sset Master toggle",
+		"on-click-right": "pavucontrol"
+	},
+	"memory": {
+		//"interval": 5,
+		//"format": "Mem {}%"
+        "interval": 5,
+        "format": "{used:0.1f}G/{total:0.1f}G "
+	},
+	"cpu": {
+		"interval": 1,
+        "min-length": 16,
+		"format": "CPU {usage:2}% : {avg_frequency}Ghz"
+	},
+	"temperature": {
+		"interval": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input",
+		"format": "{temperatureC}°C "
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	"disk": {
+		"interval": 5,
+		"format": "Disk {percentage_used:2}%",
+		"path": "/"
+	},
+	"tray": {
+		"icon-size": 20
+	}
+}
