@@ -1,46 +1,24 @@
 * {
     /*
-	font-size: 15px;
-	font-family: monospace;*/
 	font-family: Terminus, Siji;
-	font-size: 9pt;
+    */
+	font-family: Ubuntu,sans-serif, Siji;
+	font-size: 10pt;
 }
 
 window#waybar {
-	/*background: #292b2e;
-	color: #fdf6e3;
-    */
-    background: #070D1A;
-	color: #fdf6e3;
-
-}
-
-#custom-right-arrow-dark,
-#custom-left-arrow-dark {
-	color: #1a1a1a;
-}
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	color: #070D1A;
     /*
-	background: #1a1a1a;
+    background: #1c1c1c;
     */
-	background: #161821;
+    background: rgba(0, 0, 0, 0.8);
+	color: #ffffff;
 }
 
-#workspaces,
-#pulseaudio,
-#memory,
-#cpu,
-#clock,
-#backlight,
-#network,
-#temperature,
-#battery,
-#disk,
-#tray {
-	background: #161821;
+/*
+#custom-seperator {
+    color: #fbf1c7;
 }
+*/
 
 #workspaces button {
 	padding: 0 4px;
@@ -50,32 +28,25 @@ window#waybar {
 	color: #268bd2;
 }
 #workspaces button:hover {
-	box-shadow: inherit;
-	text-shadow: inherit;
-}
-#workspaces button:hover {
 	background: #1a1a1a;
-	border: #1a1a1a;
-	padding: 0 0px;
 }
-
 #pulseaudio {
-	color: #afafff;
+	color: #fb4934;
 }
 #memory {
-	color: #2cc198;
+	color: #b8bb26;
 }
-#cpu {
-	color: #6cbbc4;
+#cpu, #custom-fans, #custom-cpu_governor {
+	color: #ebdbb2;
 }
 #temperature {
-	color: #ee5555;
+	color: #cc241d;
 }
 #battery {
-	color: #859950;
+	color: #83a598;
 }
 #network {
-	color: #c55950;
+	color: #d3869b;
 }
 
 #clock,
@@ -87,6 +58,8 @@ window#waybar {
 #backlight,
 #network,
 #battery,
+#custom-fans,
+#custom-cpu_governor,
 #disk {
 	padding: 0 8px;
 }

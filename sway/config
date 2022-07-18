@@ -1,38 +1,51 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# GTK+3 takes too long
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
-set $term alacritty
+set $term "foot"
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu rofi -modi "window,run,drun,filebrowser" -show run -font "FiraCode 16"
+set $menu /home/ahmed/.config/sway/bin/rofi -modi "run,drun,filebrowser" -show run -show-icons | xargs swaymsg exec --
 
-
-### Output configuration
 #
-# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-#output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Pictures/Wallpapers/wallhaven-96w8e8.png fill
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 resolution 1920x1080 position 0,0
+#output HDMI-A-1 resolution 1920x1080 position 1920,0
+output HDMI-A-1 resolution 1080x720 position 1920,0
+
+# Wallpaper
+set $wallpapers_path $HOME/Pictures/Wallpapers/
+output * bg `find $wallpapers_path -type f | shuf -n 1 --random-source=/dev/urandom` fill
+# Keybind to change wallpaper
+bindsym $mod+Shift+p output * bg `find $wallpapers_path -type f | shuf -n 1 --random-source=/dev/urandom` fill
+
+#Assign workspaces to monitors
+workspace 1 output eDP-1 HDMI-A-1
+workspace 2 output eDP-1 HDMI-A-1
+workspace 3 output eDP-1 HDMI-A-1
+workspace 4 output eDP-1 HDMI-A-1
+workspace 5 output eDP-1 HDMI-A-1
+workspace 6 output HDMI-A-1 eDP-1
+workspace 7 output HDMI-A-1 eDP-1
+workspace 8 output HDMI-A-1 eDP-1
+workspace 9 output HDMI-A-1 eDP-1
+workspace 10 output HDMI-A-1 eDP-1
 
 ### Idle configuration
 #
@@ -46,6 +59,11 @@ output * bg ~/Pictures/Wallpapers/wallhaven-96w8e8.png fill
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+          timeout 600 'swaylock -c 000000 -f --font FiraCode' \
+          timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -c 000000 -f --font FiraCode'
+
 
 ### Input configuration
 #
@@ -67,7 +85,12 @@ input "1739:31251:DLL06E5:01_06CB:7A13_Touchpad" {
     tap_button_map lrm
     drag enabled
     click_method clickfinger
+    scroll_factor 1.2
 }
+
+#input type:pointer {
+#    scroll_factor 1.2
+#}
 
 
 ### Key bindings
@@ -76,7 +99,7 @@ input "1739:31251:DLL06E5:01_06CB:7A13_Touchpad" {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
-    bindsym $mod+Shift+Return exec ~/.config/sway/sway_cwd.sh
+    bindsym $mod+Shift+Return exec ~/.config/sway/sway_cwd.sh $term
 
     # Kill focused window
     #bindsym $mod+Shift+q kill
@@ -236,7 +259,7 @@ bar {
 #    }
 }
 
-include @sysconfdir@/sway/config.d/*
+#include @sysconfdir@/sway/config.d/*
 
 
 #My configs 
@@ -251,13 +274,16 @@ bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
 #language
 input type:keyboard {
     xkb_layout us,ar 
-    xkb_options grp:win_space_toggle,compose:caps
+    xkb_options grp:win_space_toggle
 }
 
 #control fans
-bindsym $mod+F4 exec i8kfan 0 0
-bindsym $mod+F5 exec i8kfan 0 1
-bindsym $mod+F6 exec i8kfan 1 1
+bindsym $mod+F4 exec ~/.config/sway/toggle_cpu_governor.sh
+bindsym $mod+F5 exec `i8kfan 0 0 && echo "Shutting down fans"        | xargs -0 notify-send i8kfan`
+bindsym $mod+F6 exec `i8kfan 0 1 && echo "Running one fan (medium)"  | xargs -0 notify-send i8kfan`
+bindsym $mod+F7 exec `i8kfan 1 1 && echo "Running two fans (medium)" | xargs -0 notify-send i8kfan`
+bindsym $mod+F8 exec `i8kfan 2 2 && echo "Running two fans (max)"    | xargs -0 notify-send i8kfan`
+
 
 #control screen
 bindsym XF86MonBrightnessDown exec light -U 10
@@ -266,16 +292,26 @@ bindsym $mod+F11 exec light -U 10
 bindsym $mod+F12 exec light -A 10
 
 #gaps and border
-gaps inner 6
+gaps inner 10
 default_border pixel 3
 
 #mouse focus
 focus_follows_mouse always
 
 #lock
-bindsym Mod1+Shift+l exec swaylock -c 111111 -f --font FiraCode
+bindsym Mod1+Shift+l exec swaylock -i `find $wallpapers_path -type f | shuf -n 1` -f --font FiraCode
+
 
 #focused client colors
 set $unfocused_border #070D1A
-set $focused_border #3560C8
+#set $focused_border #3560C8
+set $focused_border #6998AB
 client.focused $unfocused_border $unfocused_border $unfocused_border $focused_border $focused_border
+
+#Xwayland settings
+xwayland enable
+
+#Setting vscode to transparent
+#for_window [app_id="code-oss"] opacity 0.95
+
+exec wl-paste -t text --watch clipman store --no-persist

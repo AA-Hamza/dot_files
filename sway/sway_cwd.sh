@@ -6,9 +6,9 @@ cwd="$( swaymsg -t get_tree |
   sort | tail -n 1 | tr -d '\n' )"
 
 if [ -d "$cwd" ]; then
-  alacritty --working-directory "$cwd" &
+  $1 --working-directory "$cwd" &
   disown
 else
-  alacritty &
+  $1 &
   disown
 fi
